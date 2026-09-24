@@ -1,0 +1,17 @@
+name: Wake up Hugging Face Space
+
+on:
+  schedule:
+    # يعمل تلقائياً كل 6 ساعات لإبقائه مستيقظاً بشكل دائم
+    - cron: '0 */6 * * *'
+  # يتيح لك تشغيله يدوياً للتجربة في أي وقت
+  workflow_dispatch:
+
+jobs:
+  restart-space:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restart HF Space
+        run: |
+          curl -X POST https://huggingface.co/api/spaces/kafagva/ytb0677/restart \
+               -H "Authorization: Bearer ${{ secrets.HF_TOKEN }}"
